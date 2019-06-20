@@ -1,1 +1,1 @@
-# Azure SQL Database Bulk Upsert performance optimizations
+# Optimized Azure SQL Database Bulk Upsert
