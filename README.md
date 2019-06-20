@@ -16,3 +16,9 @@ Generally speaking, there 2 major approaches to achieve this:
 
 2) Leverage bulk insert techniques, like using SqlBulkCopy class in ADO.NET, to upload the entire dataset to Azure SQL Database, and then execute all the INSERT/UPDATE (or MERGE) operation within a single batch, to mininize roundtrips and log writes and maximize throughput. This approach can reduce overall execution times from hours to minutes/seconds, even if the incoming dataset is made of millions of records.
 
+When using data integration services like Azure Data Factory, scenarios like #1 are usually provided out of the box, as described here: <https://docs.microsoft.com/en-us/azure/data-factory/connector-azure-sql-database#invoking-stored-procedure-for-sql-sink>
+
+Implementing instead something like described in #2 requires a bit of workaround, as it will depend more on specific scenario requirements that may vary on a customer by customer basis.
+
+An example on how to implement such a scenario is what is provided in this article from now on.
+
