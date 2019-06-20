@@ -1,0 +1,38 @@
+{
+	"name": "OrchestrateDataLoad",
+	"properties": {
+		"activities": [
+			{
+				"name": "ExecutePrepare",
+				"type": "ExecutePipeline",
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PrepareGlobalTempTable",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": false
+				}
+			},
+			{
+				"name": "ExecuteCopy",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ExecutePrepare",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CopyAndMerge",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
